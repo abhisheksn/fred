@@ -3,3 +3,8 @@ requests
 plotly-express
 plotly
 python-dotenv
+requests
+sendgrid==6.6.0
+
+Flask
+app
