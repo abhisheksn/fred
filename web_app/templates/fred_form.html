@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <h1>FRED Form</h1>
+
+    <p>Request data for your state...</p>
+
+    <form action="/form" method="POST">
+
+        <label>State ID:</label>
+        <input type="text" name="state_id" placeholder="CA" value="CA">
+        <br>
+
+        <button>Submit</button>
+    </form>
+
+{% endblock %}

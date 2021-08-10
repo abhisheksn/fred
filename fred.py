@@ -32,6 +32,24 @@ load_dotenv()
 api_key = os.getenv("FRED_API_KEY")
 
 
+#web_app_updates
+state_id = input("Please enter the State Abbreviation Code:")
+#series_id = (state_id) + "UR"  #Unemployment by State
+#series_id = (state_id) + "RQGSP" #GDP by State
+#series_id = (state_id) + "POP" #Resident population by State
+series_id = "MEDLISPRI" + (state_id) #Median Listing Price by State
+#series_id = "MEHOINUS" + (state_id) + "A646N"
+
+#Request from FRED URL
+FRED_URL = f"https://api.stlouisfed.org/fred/series/observations?series_id={series_id}&api_key={api_key}&file_type=json"
+FRED_request = requests.get(FRED_URL)
+FRED_data = json.loads(FRED_request.text)
+data = FRED_data["observations"]
+df = DataFrame(data)
+print(df)
+fig = px.line(df, x='date', y='value', title=f'{series_id} over time')
+fig.show()
+=======
 #Since the data on FRED is presented differently, we'll use different timeframes for different reports:
 tfs = [
     None,
@@ -68,3 +86,4 @@ for report_id in range (1,6):
 #plt.legend()
 #plt.show()
 #print(df)
+#>>>>>>> main
