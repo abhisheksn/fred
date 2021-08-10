@@ -25,52 +25,57 @@ def request(series_id, api_key, yrs):
     df = df[df.date > cutoff_dt]
     return df
 
-#This is the input!!!
-state_id = input("Please enter the State Abbreviation Code:")
+def func(state_id):
 
-#Loading API Key from .env file
-load_dotenv()
-api_key = os.getenv("FRED_API_KEY")
+    #Loading API Key from .env file
+    load_dotenv()
+    api_key = os.getenv("FRED_API_KEY")
 
+    #Since the data on FRED is presented differently, we'll use different timeframes for different reports:
+    tfs = [
+        None,
+        1, # of years for Unemployment by State
+        1,   # of years for GDP by State
+        2,   # of years for Resident population by State
+        1,   # of years for Median Listing Price by State
+        2    # of years for Median Household income by State
+    ]
 
-#Since the data on FRED is presented differently, we'll use different timeframes for different reports:
-tfs = [
-    None,
-    1, # of years for Unemployment by State
-    1,   # of years for GDP by State
-    2,   # of years for Resident population by State
-    1,   # of years for Median Listing Price by State
-    2    # of years for Median Household income by State
-]
+    #Here we determine weights for different criteria
+    indexes = [
+        None,
+        -10, # index for Unemployment by State
+        5,   # index for GDP by State
+        20,   # index for Resident population by State
+        None,
+        3    # index for Median Household income by State
+    ]
 
-#Here we determine weights for different criteria
-indexes = [
-    None,
-    -10, # index for Unemployment by State
-    5,   # index for GDP by State
-    20,   # index for Resident population by State
-    None,
-    3    # index for Median Household income by State
-]
+    columns = [0, 1]
+    slps = list(range(6))
 
-columns = [0, 1]
-slps = list(range(6))
+    cur_date = datetime.datetime.now().strftime("%Y:%m:%d-%H:%M:%S")
 
-cur_date = datetime.datetime.now().strftime("%Y:%m:%d-%H:%M:%S")
+    for report_id in range (1,6):
 
-for report_id in range (1,6):
-    
-    df = request(hashgen(state_id, report_id), api_key, tfs[report_id])
-    df.drop(df.columns[columns], axis=1, inplace=True)
-    df.reset_index(drop=True, inplace=True)
-    df.value = pd.to_numeric(df.value, errors='coerce', downcast='float')
-    slope, intercept, r_value, p_value, std_err = stats.linregress(df.index, df["value"])
-    slps[report_id] = slope/df.value.median() #We'll use weighted slopes
-    if report_id == 4:
-        med_price = float(df.value.tail(1))
+        df = request(hashgen(state_id, report_id), api_key, tfs[report_id])
+        df.drop(df.columns[columns], axis=1, inplace=True)
+        df.reset_index(drop=True, inplace=True)
+        df.value = pd.to_numeric(df.value, errors='coerce', downcast='float')
+        slope, intercept, r_value, p_value, std_err = stats.linregress(df.index, df["value"])
+        slps[report_id] = slope/df.value.median() #We'll use weighted slopes
+        if report_id == 4:
+            med_price = float(df.value.tail(1))
 
-score = (slps[1]+0.05) * indexes[1] + (slps[2]-0.03) * indexes[2] + slps[3] * indexes[3] + (slps[5]-0.08) * indexes[5]
+    score = (slps[1]+0.05) * indexes[1] + (slps[2]-0.03) * indexes[2] + slps[3] * indexes[3] + (slps[5]-0.08) * indexes[5]
 
-print("State:", state_id)
-print("Median price:", med_price)
-print("Recommendation:",score)
+    return med_price, score
+
+if __name__ == "__main__":
+    #This is the input!!!
+    state_id = input("Please enter the State Abbreviation Code:")
+    mp, sc = func(state_id)
+
+    print("State:", state_id)
+    print("Median price:", mp)
+    print("Recommendation:",sc)
