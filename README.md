@@ -47,6 +47,7 @@ The ".gitignore" file generated during the GitHub repo creation process should a
 #ignore secret environment variable values in the ".env" file:
 .env
 Ensure to create .env file before creating .gitignore file.
+
 Usage
 Run the Python script:
 python fred.py
