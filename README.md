@@ -6,7 +6,9 @@ This Python application enables investors and home buyers to get updates on medi
 Prerequisites
 
 Anaconda 3.7+
+
 Python 3.7+
+
 Pip
 
 Installation

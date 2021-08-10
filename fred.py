@@ -12,10 +12,10 @@ api_key = os.getenv("FRED_API_KEY")
 
 
 state_id = input("Please enter the State Abbreviation Code:")
-series_id = (state_id) + "UR"  #Unemployment by State
+#series_id = (state_id) + "UR"  #Unemployment by State
 #series_id = (state_id) + "RQGSP" #GDP by State
 #series_id = (state_id) + "POP" #Resident population by State
-#series_id = "MEDLISPRI" + (state_id) #Median Listing Price by State
+series_id = "MEDLISPRI" + (state_id) #Median Listing Price by State
 #series_id = "MEHOINUS" + (state_id) + "A646N"
 
 #Request from FRED URL
