@@ -11,7 +11,7 @@ Python 3.7+
 
 Pip
 
-Installation
+# Installation
 
 Fork this remote repository under your own control, then "clone" or download your remote copy onto your local computer.
 
@@ -30,7 +30,7 @@ pip install -r requirements.txt
 
 NOTE: if this command throws an error like "Could not open requirements file: [Errno 2] No such file or directory", make sure you are running it from the repository's root directory, where the requirements.txt file exists (see the initial cd step above).
 
-Setup
+# Setup
 
 Follow these [SendGrid setup instructions](https://github.com/prof-rossetti/intro-to-python/blob/master/notes/python/packages/sendgrid.md#setup) to sign up for a SendGrid account, configure your account's email address (i.e. `SENDER_EMAIL_ADDRESS`), and obtain an API key (i.e. `SENDGRID_API_KEY`).
 Get your own free API key from https://research.stlouisfed.org/useraccount/apikeys (i.e. 'FRED_API_KEY').

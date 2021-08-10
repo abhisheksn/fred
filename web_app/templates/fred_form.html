@@ -6,9 +6,11 @@
 
     <p>Request data for your state...</p>
 
-    <form>
-        <label> for="state">State ID:</label><br>
-        <input type="text" name="state_id"><br>
+    <form action="/form" method="POST">
+
+        <label>State ID:</label>
+        <input type="text" name="state_id" placeholder="CA" value="CA">
+        <br>
 
         <button>Submit</button>
     </form>

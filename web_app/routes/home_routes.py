@@ -18,7 +18,7 @@ def about():
     return render_template("about.html")
 
 @home_routes.route("/form")
-def about():
+def form():
     print("FRED FORM...")
     #return "FRED FORM"
     return render_template("fred_form.html")
