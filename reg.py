@@ -61,8 +61,6 @@ cur_date = datetime.datetime.now().strftime("%Y:%m:%d-%H:%M:%S")
 
 #state_id = input("Please enter the State Abbreviation Code:")
 
-
-
 report = pd.DataFrame()
 
 for s in all_states:
