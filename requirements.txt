@@ -3,3 +3,4 @@ requests
 plotly-express
 plotly
 python-dotenv
+flask
