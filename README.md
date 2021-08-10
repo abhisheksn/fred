@@ -60,3 +60,13 @@ python fred.py
 # alternative module-style invocation (only required if importing from one file to another):
 python -m fred.py
 NOTE: if you see an error like "ModuleNotFoundError: No module named '...'", it's because the given package isn't installed, so run the pip command above to ensure that package has been installed into the virtual environment.
+
+# Web App 
+
+# Mac OS:
+FLASK_APP=web_app flask run
+
+# Windows OS:
+# ... if `export` doesn't work for you, try `set` instead
+export FLASK_APP=web_app
+flask run
