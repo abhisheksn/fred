@@ -24,7 +24,12 @@ def request(series_id, api_key, yrs):
     FRED_URL = f"https://api.stlouisfed.org/fred/series/observations?series_id={series_id}&api_key={api_key}&file_type=json"
     FRED_request = requests.get(FRED_URL)
     FRED_data = json.loads(FRED_request.text)
-    data = FRED_data["observations"]
+    #data = FRED_data["observations"]
+    try:
+        data = FRED_data["observations"]
+    except KeyError:
+        print("Incorrect input, try again!")
+        exit()
     df = pd.DataFrame(data)
     df.date=pd.to_datetime(df.date)
     cutoff_dt = df.date.max() - pd.DateOffset(years=yrs)

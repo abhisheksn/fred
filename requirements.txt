@@ -1,8 +1,6 @@
 
 plotly-express
 plotly
-
-
 python-dotenv
 pgeocode
 pandas
@@ -10,11 +8,8 @@ requests
 sendgrid==6.6.0
 matplotlib
 flask
-
 gunicorn  #heroku wants it to run web app
 
-#
 # TEST
-#
 pytest
 app
