@@ -1,3 +1,6 @@
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import (Mail, Attachment, FileContent, FileName, FileType, Disposition, ContentId)
+import base64
 import plotly.graph_objects as go
 import os, time, csv, datetime, requests, json, matplotlib, time
 matplotlib.use('TkAgg')
@@ -99,12 +102,41 @@ for s in all_states:
 filename = f"data/fred_{cur_date}.csv"
 report.to_csv(filename)
 
+#Sending CSV attachment as email
+
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
+SENDER_EMAIL_ADDRESS = os.getenv("SENDER_EMAIL")
+
+user_email = input("Please enter your Email address:")
+
+message = Mail(
+    from_email=SENDER_EMAIL_ADDRESS,
+    to_emails=user_email,
+    subject='AGY Consultants Country Report',
+    html_content='Please find the AGY Consultants Country Report attached with this email.')
+with open(filename, 'rb') as f:
+    data = f.read()
+    f.close()
+encoded = base64.b64encode(data).decode()
+attachment = Attachment()
+attachment.file_content = FileContent(encoded)
+attachment.file_name = FileName('AGY Consultants Country Report.csv')
+message.attachment = attachment
+try:
+    sendgrid_client = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+    response = sendgrid_client.send(message)
+    print("Email Successfully Delivered")
+except Exception as e:
+    print("OOPS", type(e), e)
+
+#Chloropleth Map
+#Source: https://plotly.com/python/choropleth-maps/
 df = read_csv(filename)
 fig = go.Figure(data=go.Choropleth(
     locations=df['State'],  # Spatial coordinates
     z=df['Coefficient'].astype(float),  # Data to be color-coded
     locationmode='USA-states',  # set of locations match entries in `locations`
-    colorscale='RdYlGn',
+    colorscale='Spectral',
     colorbar_title="AGY Coefficient Score",
 ))
 
@@ -114,10 +146,3 @@ fig.update_layout(
 )
 
 fig.show()
-
-#dts = df.value
-#print(dts)
-#dts.plot(label = "Unemployment Rate")
-#plt.legend()
-#plt.show()
-#print(df)
