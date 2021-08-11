@@ -1,3 +1,4 @@
+import plotly.graph_objects as go
 import os, time, csv, datetime, requests, json, matplotlib, time
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
@@ -72,7 +73,7 @@ for s in all_states:
     prognosis = None
 
     for report_id in range (1,6):
-        
+
         df = request(hashgen(s, report_id), api_key, tfs[report_id])
         df.drop(df.columns[columns], axis=1, inplace=True)
         df.reset_index(drop=True, inplace=True)
@@ -81,7 +82,7 @@ for s in all_states:
         slps[report_id] = slope/df.value.median() #We'll use weighted slopes
         if report_id == 4:
             med_price = float(df.value.tail(1))
-    
+
     score = (slps[1]+0.05) * indexes[1] + (slps[2]-0.03) * indexes[2] + slps[3] * indexes[3] + (slps[5]-0.08) * indexes[5]
     if score > 0.4:
         prognosis = "Strong positive"
@@ -96,6 +97,22 @@ for s in all_states:
 
 filename = f"data/fred_{cur_date}.csv"
 report.to_csv(filename)
+
+#fig = go.Figure(data=go.Choropleth(
+#    locations=df['code'],  # Spatial coordinates
+#    z=df['total exports'].astype(float),  # Data to be color-coded
+#    locationmode='USA-states',  # set of locations match entries in `locations`
+#    colorscale='Reds',
+#    colorbar_title="Millions USD",
+#))
+
+#fig.update_layout(
+#    title_text='2011 US Agriculture Exports by State',
+#    geo_scope='usa',  # limite map scope to USA
+#)
+
+#fig.show()
+
 #dts = df.value
 #print(dts)
 #dts.plot(label = "Unemployment Rate")
