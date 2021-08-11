@@ -12,10 +12,10 @@ def recommendation():
     request_data = dict(request.form)
     state_id = request_data["state_id"]
     results = func(state_id)
-    if results:
-        flash("Results Generated Successfully!", "success")
-        Median_Price, Recommendation = func(state_id)
-        return render_template("results.html", median_price=Median_Price, recommendation=Recommendation, state_id=state_id)
-    else:
-        flash("Input Error. Please try again!", "danger")
-        return redirect("/form/recommendation")
+#    if results:
+#        flash("Results Generated Successfully!", "success")
+    Median_Price, Recommendation = func(state_id)
+    return render_template("results.html", median_price=Median_Price, recommendation=Recommendation, state_id=state_id)
+#    else:
+#        flash("Input Error. Please try again!", "danger")
+#        return redirect("/form/recommendation")
