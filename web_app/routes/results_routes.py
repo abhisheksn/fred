@@ -1,6 +1,5 @@
 
 from flask import Blueprint, request, render_template, flash, redirect
-
 from app.fred import func
 
 results_routes = Blueprint("results_routes", __name__)

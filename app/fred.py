@@ -29,7 +29,7 @@ def request(series_id, api_key, yrs):
         data = FRED_data["observations"]
     except KeyError:
         print("Incorrect input, try again!")
-        exit()
+        return None
     df = pd.DataFrame(data)
     df.date=pd.to_datetime(df.date)
     cutoff_dt = df.date.max() - pd.DateOffset(years=yrs)
@@ -70,6 +70,8 @@ def func(state_id):
     for report_id in range (1,6):
 
         df = request(hashgen(state_id, report_id), api_key, tfs[report_id])
+        if df is None:
+            return None
         df.drop(df.columns[columns], axis=1, inplace=True)
         df.reset_index(drop=True, inplace=True)
         df.value = pd.to_numeric(df.value, errors='coerce', downcast='float')
