@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from scipy import stats
 from dotenv import load_dotenv
+from pandas import read_csv
 
 all_states=["AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MS", "MO", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VT", "WA", "WI", "WV", "WY"]
 
@@ -65,7 +66,7 @@ cur_date = datetime.datetime.now().strftime("%Y:%m:%d-%H:%M:%S")
 report = pd.DataFrame()
 
 for s in all_states:
-    print(s)
+    #print(s)
 
     #Here we'll store all the slopes from different df's
     slps = list(range(6))
@@ -98,20 +99,21 @@ for s in all_states:
 filename = f"data/fred_{cur_date}.csv"
 report.to_csv(filename)
 
-#fig = go.Figure(data=go.Choropleth(
-#    locations=df['code'],  # Spatial coordinates
-#    z=df['total exports'].astype(float),  # Data to be color-coded
-#    locationmode='USA-states',  # set of locations match entries in `locations`
-#    colorscale='Reds',
-#    colorbar_title="Millions USD",
-#))
+df = read_csv(filename)
+fig = go.Figure(data=go.Choropleth(
+    locations=df['State'],  # Spatial coordinates
+    z=df['Coefficient'].astype(float),  # Data to be color-coded
+    locationmode='USA-states',  # set of locations match entries in `locations`
+    colorscale='RdYlGn',
+    colorbar_title="AGY Coefficient Score",
+))
 
-#fig.update_layout(
-#    title_text='2011 US Agriculture Exports by State',
-#    geo_scope='usa',  # limite map scope to USA
-#)
+fig.update_layout(
+    title_text='AGY Coefficient by State Aug 2021',
+    geo_scope='usa',  # limit map scope to USA
+)
 
-#fig.show()
+fig.show()
 
 #dts = df.value
 #print(dts)
