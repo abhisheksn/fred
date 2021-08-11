@@ -1,4 +1,5 @@
-{% extends "layout.html" %}
+{% extends "bootstrap_layout.html" %}
+{% set active_page = "form" %}
 
 {% block content %}
 
@@ -6,7 +7,7 @@
 
     <p>Request data for your state by inputting two letter state abbreviation id...</p>
 
-    <form action="/form" method="POST">
+    <form action="/form/recommendation" method="POST">
 
         <label>State ID:</label>
         <input type="text" name="state_id" placeholder="CA" value="CA">
