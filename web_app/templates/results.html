@@ -1,0 +1,12 @@
+{% extends "bootstrap_layout.html" %}
+{% set active_page = "results" %}
+
+{% block content %}
+
+    <h2>Our recommendation for {{ state_id }}</h2>
+
+    <p>Median Price: {{ median_price }}</p>
+
+    <p>Recommendation: {{ recommendation }}</p>
+
+{% endblock %}
