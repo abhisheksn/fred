@@ -31,7 +31,7 @@ SETUP
 
 In the root directory of your local repository, create a new file called ".env", and update the contents of the ".env" file to specify your desired user email address and obtain API Keys from SENDGRID and FRED (then make sure to SAVE the ".env" file aftwards):
 
-Follow these [SendGrid setup instructions](https://github.com/prof-rossetti/intro-to-python/blob/master/notes/python/packages/sendgrid.md#setup) to sign up for a SendGrid account, configure your account email address (i.e. `SENDER_EMAIL_ADDRESS`), and obtain an API key (i.e. `SENDGRID_API_KEY`).
+Follow these [SendGrid setup instructions](https://github.com/prof-rossetti/intro-to-python/blob/master/notes/python/packages/sendgrid.md#setup) to sign up for a SendGrid account, configure your account email address (i.e. `SENDER_EMAIL`), and obtain an API key (i.e. `SENDGRID_API_KEY`).
 
 Also, get your own free API key from https://research.stlouisfed.org/useraccount/apikeys (i.e. 'FRED_API_KEY').
 
@@ -39,7 +39,7 @@ Also, get your own free API key from https://research.stlouisfed.org/useraccount
 # these are example contents for the ".env" file:
 # required vars:
 SENDGRID_API_KEY="_______________"
-SENDER_EMAIL_ADDRESS="_______________"
+SENDER_EMAIL="_______________"
 FRED_API_KEY="_______________"
 
 
