@@ -1,4 +1,4 @@
-
+#These are the requirements
 plotly-express
 plotly
 python-dotenv
@@ -9,7 +9,9 @@ sendgrid==6.6.0
 matplotlib
 flask
 gunicorn  #heroku wants it to run web app
-
-# TEST
+scipy
+datetime
+json
+time
 pytest
 app

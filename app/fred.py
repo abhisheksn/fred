@@ -1,4 +1,4 @@
-import os, time, datetime, requests, json, time
+import os, time, datetime, requests, json
 import pandas as pd
 from scipy import stats
 from dotenv import load_dotenv

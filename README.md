@@ -94,4 +94,4 @@ In the premium version, the user will be asked to input an email address to rece
 ## WEB-APP
 The web-app can be accessed at [agy-consultants.herokuapp.com](https://agy-consultants.herokuapp.com/).
 
-This app was created by [Yanjka Regan](https://github.com/yr999), [Grigory Pastera](https://github.com/gbacila) and [Abhishek Swaminathan](https://github.com/abhisheksn).
+This app was created by [Yanjka Regan](https://github.com/yr999), [Grigory Patsera](https://github.com/gbacila) and [Abhishek Swaminathan](https://github.com/abhisheksn).
