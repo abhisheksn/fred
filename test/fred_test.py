@@ -10,6 +10,7 @@ def test_func():
     # with valid state_id
     results = func(state_id="CA")
     assert results[1] == "Positive"
+    assert results[0] == "$749,900"
 
     # with invalid state_id, fails gracefully and returns nothing:
     invalid_results = func(state_id="CAS")
