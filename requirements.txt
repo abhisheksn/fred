@@ -11,6 +11,5 @@ flask
 gunicorn  #heroku wants it to run web app
 scipy
 datetime
-time
 pytest
 app
