@@ -12,4 +12,3 @@ gunicorn  #heroku wants it to run web app
 scipy
 datetime
 pytest
-app
